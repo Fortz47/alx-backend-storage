@@ -5,8 +5,8 @@ DELIMITER $$
 CREATE TRIGGER update_quantity AFTER INSERT
 ON `orders` FOR EACH ROW
 BEGIN
-UPDATE `items`, `orders`
-SET item.quantity = item.quantity - orders.number
-WHERE items.name == orders.item_name;
+UPDATE `items`
+SET quantity = quantity - NEW.number
+WHERE name = NEW.item_name;
 END $$
 DELIMITER ;
