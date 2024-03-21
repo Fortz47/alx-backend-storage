@@ -3,7 +3,7 @@
 
 DELIMITER $$
 CREATE TRIGGER update_quantity AFTER INSERT
-0N `orders` FOR EACH ROW
+ON `orders` FOR EACH ROW
 BEGIN
 UPDATE `items`, `orders`
 SET item.quantity = item.quantity - orders.number
