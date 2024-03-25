@@ -1,1 +1,3 @@
-#!/usr/bin/env bash
+// deletes all document that mathches a filter
+
+db.school.delete({"name": "Holberton school"})
