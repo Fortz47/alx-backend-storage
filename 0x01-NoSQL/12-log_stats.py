@@ -26,5 +26,6 @@ def get_stats():
     print(f'\tmethod PUT: {methodDict["PUT"]}')
     print(f'\tmethod PATCH: {methodDict["PATCH"]}')
     print(f'\tmethod DELETE: {methodDict["DELETE"]}')
+    print(f'{status_count} status check')
 
 get_stats()
