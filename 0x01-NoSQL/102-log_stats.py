@@ -19,17 +19,15 @@ def get_logs():
     print(f'\tmethod DELETE: {methodDict["DELETE"]}')
     print(f'{status_count} status check')
     ips = db.nginx.aggregate([
-        {'$group': {'_id': '$ip', 'count': {'$sum': 1}}}
+        {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}},
+        {"$limit": 10}
     ])
     print('IPs:')
-    i = 0
     for ip in ips:
         _ip = ip.get('_id')
         count = ip.get('count')
         print(f'{_ip}: {count}')
-        i += 1
-        if i >= 10:
-            break
 
 
 if __name__ == '__main__':
