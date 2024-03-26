@@ -23,8 +23,8 @@ def get_logs():
     # creates list of tuple [(k, v)]
     sortedIps = sorted(ipDict.items(), key=lambda x: x[1], reverse=True)
     print('IPs:')
-    for i, (ip, count) in enumerate(sorted_ips[:10], start=1):
-        print(f'{ip}: {count}')
+    # for i, (ip, count) in enumerate(sorted_ips[:10], start=1):
+    #     print(f'{ip}: {count}')
 
 
 if __name__ == '__main__':
