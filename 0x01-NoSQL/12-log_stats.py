@@ -20,7 +20,7 @@ def get_stats():
     # \tmethod DELETE: {methodDict["DELETE"]}\n \
     # {status_count} status check'
     # print(result)
-    print(f'{documentCount} logs\nMethods:\n')
+    print(f'{documentCount} logs\nMethods:')
     print(f'\tmethod GET: {methodDict["GET"]}')
     print(f'\tmethod POST: {methodDict["POST"]}')
     print(f'\tmethod PUT: {methodDict["PUT"]}')
