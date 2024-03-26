@@ -11,13 +11,13 @@ def get_stats():
     method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     methodDict = {k: db.nginx.find({'method': k}).count() for k in methods}
     status_count = db.nginx.find({path: "/status"}).count()
-    result = f'{documentCount} logs\n
-    Methods:\n
-    \tmethod GET: {methodDict["GET"]}\n
-    \tmethod POST: {methodDict["POST"]}\n
-    \tmethod PUT: {methodDict["PUT"]}\n
-    \tmethod PATCH: {methodDict["PATCH"]}\n
-    \tmethod DELETE: {methodDict["DELETE"]}\n
+    result = f'{documentCount} logs\n \
+    Methods:\n \
+    \tmethod GET: {methodDict["GET"]}\n \
+    \tmethod POST: {methodDict["POST"]}\n \
+    \tmethod PUT: {methodDict["PUT"]}\n \
+    \tmethod PATCH: {methodDict["PATCH"]}\n \
+    \tmethod DELETE: {methodDict["DELETE"]}\n \
     {status_count} status check\n'
 
 get_stats()
