@@ -28,4 +28,5 @@ def get_stats():
     print(f'\tmethod DELETE: {methodDict["DELETE"]}')
     print(f'{status_count} status check')
 
+
 get_stats()
