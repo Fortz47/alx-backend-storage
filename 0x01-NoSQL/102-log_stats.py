@@ -18,10 +18,8 @@ def get_logs():
     print(f'\tmethod PATCH: {methodDict["PATCH"]}')
     print(f'\tmethod DELETE: {methodDict["DELETE"]}')
     print(f'{status_count} status check')
-    ipList = [doc.get('ip') for doc in db.nginx.find() if doc.get('ip')]
-    ips = set(ipList)
-    count = db.nginx.count_documents
-    ipDict = {k: count({'ip': k}) for k in ips}
+    ips = db.nginx.distinct("ip")
+    ipDict = {ip: db.nginx.count_documents({'ip': ip}) for ip in ips}
     # creates list of tuple [(k, v)]
     sortedIps = sorted(ipDict.items(), key=lambda x: x[1], reverse=True)
     print('IPs:')
