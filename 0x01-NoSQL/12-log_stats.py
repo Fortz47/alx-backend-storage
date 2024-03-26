@@ -9,7 +9,7 @@ def get_stats():
     db = client.logs
     documentCount = db.nginx.count_documents({})
     method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    methodDict = {k: db.nginx.count_documents({'method': k}) for k in methods}
+    methodDict = {k: db.nginx.count_documents({'method': k}) for k in method}
     status_count = db.nginx.count_documents({path: "/status"})
     result = f'{documentCount} logs\n \
     Methods:\n \
