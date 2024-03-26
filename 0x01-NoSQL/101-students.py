@@ -9,5 +9,5 @@ def top_students(mongo_collection):
         topics = student.get('topics', [])
         val = sum(1 for i in topics if i['score'] and i['score'] >= 0)
         averageScore = sum(i['score'] for i in topics if i['score'] and i['score'] >= 0) / val
-        mongo_collection.update({'_id': student['_id']}, {'$push' : {'topics': {'averageScore': averageScore}}})
+        mongo_collection.update_one({'_id': student['_id']}, {'$push' : {'topics': {'averageScore': averageScore}}})
     return mongo_collection.find().sort('averageScore', -1)
