@@ -10,16 +10,7 @@ def get_stats():
     documentCount = db.nginx.count_documents({})
     method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     methodDict = {k: db.nginx.count_documents({'method': k}) for k in method}
-    status_count = db.nginx.count_documents({'path': "/status"})
-    # result = f'{documentCount} logs\n \
-    # Methods:\n \
-    # \tmethod GET: {methodDict["GET"]}\n \
-    # \tmethod POST: {methodDict["POST"]}\n \
-    # \tmethod PUT: {methodDict["PUT"]}\n \
-    # \tmethod PATCH: {methodDict["PATCH"]}\n \
-    # \tmethod DELETE: {methodDict["DELETE"]}\n \
-    # {status_count} status check'
-    # print(result)
+    status_count = db.nginx.count_documents({"method": "GET", "path": "/status"})
     print(f'{documentCount} logs\nMethods:')
     print(f'\tmethod GET: {methodDict["GET"]}')
     print(f'\tmethod POST: {methodDict["POST"]}')
@@ -29,4 +20,5 @@ def get_stats():
     print(f'{status_count} status check')
 
 
-get_stats()
+if __name__ == '__main__':
+    get_stats()
