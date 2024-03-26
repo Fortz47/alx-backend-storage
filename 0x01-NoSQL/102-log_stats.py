@@ -10,14 +10,14 @@ def get_logs():
     documentCount = db.nginx.count_documents({})
     method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     methodDict = {k: db.nginx.count_documents({'method': k}) for k in method}
-    status_count = db.nginx.count_documents({"method": "GET", "path": "/status"})
+    status = db.nginx.count_documents({"method": "GET", "path": "/status"})
     print(f'{documentCount} logs\nMethods:')
     print(f'\tmethod GET: {methodDict["GET"]}')
     print(f'\tmethod POST: {methodDict["POST"]}')
     print(f'\tmethod PUT: {methodDict["PUT"]}')
     print(f'\tmethod PATCH: {methodDict["PATCH"]}')
     print(f'\tmethod DELETE: {methodDict["DELETE"]}')
-    print(f'{status_count} status check')
+    print(f'{status} status check')
     ips = db.nginx.aggregate([
         {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
         {"$sort": {"count": -1}},
