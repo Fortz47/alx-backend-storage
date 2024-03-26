@@ -22,11 +22,14 @@ def get_logs():
         {'$group': {'_id': '$ip', 'count': {'$sum': 1}}}
     ])
     print('IPs:')
-    #for ip in ips:
-    for i in range(10):
-        _ip = ips[i].get('ip')
-        count = ips[i].get('count')
+    i = 0
+    for ip in ips:
+        _ip = ip.get('ip')
+        count = ip.get('count')
         print(f'{_ip}: {count}')
+        i += 1
+        if i >= 10:
+            break
 
 
 if __name__ == '__main__':
