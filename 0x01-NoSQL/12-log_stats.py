@@ -7,10 +7,10 @@ def get_stats():
     """provides some stats about Nginx logs stored in MongoDB"""
     client = MongoClient()
     db = client.logs
-    documentCount = db.nginx.find().count()
+    documentCount = db.nginx.count_documents({})
     method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    methodDict = {k: db.nginx.find({'method': k}).count() for k in methods}
-    status_count = db.nginx.find({path: "/status"}).count()
+    methodDict = {k: db.nginx.count_documents({'method': k}) for k in methods}
+    status_count = db.nginx.count_documents({path: "/status"})
     result = f'{documentCount} logs\n \
     Methods:\n \
     \tmethod GET: {methodDict["GET"]}\n \
