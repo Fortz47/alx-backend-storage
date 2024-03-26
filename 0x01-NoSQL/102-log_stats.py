@@ -23,7 +23,7 @@ def get_logs():
     ])
     print('IPs:')
     #for ip in ips:
-    for i in range(10)
+    for i in range(10):
         _ip = ips[i].get('ip')
         count = ips[i].get('count')
         print(f'{_ip}: {count}')
