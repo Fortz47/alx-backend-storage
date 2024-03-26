@@ -20,8 +20,8 @@ def get_logs():
     print(f'{status_count} status check')
     ipList = [doc.get('ip') for doc in db.nginx.find() if doc.get('ip')]
     ips = set(ipList)
-    count = db.nginx.count_documents
-    ipDict = {k: count({'ip': k}) for k in ips}
+    # count = db.nginx.count_documents
+    ipDict = {k: db.nginx.count_documents({'ip': k}) for k in ips}
     # creates list of tuple [(k, v)]
     sortedIps = sorted(ipDict.items(), key=lambda x: x[1], reverse=True)
     print('IPs:')
