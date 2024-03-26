@@ -19,3 +19,5 @@ def get_stats():
     \tmethod PATCH: {methodDict["PATCH"]}\n
     \tmethod DELETE: {methodDict["DELETE"]}\n
     {status_count} status check\n'
+
+get_stats()
