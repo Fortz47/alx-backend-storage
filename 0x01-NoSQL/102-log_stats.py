@@ -27,7 +27,7 @@ def get_logs():
     for ip in ips:
         _ip = ip.get('_id')
         count = ip.get('count')
-        print(f'{_ip}: {count}')
+        print(f'\t{_ip}: {count}')
 
 
 if __name__ == '__main__':
