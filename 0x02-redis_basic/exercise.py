@@ -18,7 +18,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-     def get(self, key: str, fn: Optional[Callable] = None) -> str:
+    def get(self, key: str, fn: Optional[Callable] = None) -> str:
         """Retrieve data from db"""
         data = self._redis.get(key)
         if data is None:
