@@ -14,5 +14,5 @@ class Cache:
     def store(self, data):
         """"store item in db"""
         id = str(uuid4())
-        self._redis.set(id, data)
+        self._redis.hset({id: data})
         return id
