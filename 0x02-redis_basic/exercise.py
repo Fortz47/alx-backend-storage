@@ -10,7 +10,7 @@ class Cache:
         _redis = redis.Redis()
         _redis.flushdb()
 
-    def store(data):
+    def store(self, data):
         id = str(uuid4())
         self._redis.set(id, data)
         return id
