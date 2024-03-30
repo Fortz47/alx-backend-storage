@@ -8,9 +8,10 @@ from functools import wraps
 
 def count_calls(func: Callable) -> Callable:
     """counts how many times methods of Cache class are called"""
+    key = func.__qualname__
+
     @wraps(func)
     def wrapper(self, *args, **kwargs):
-        key = func.__qualname__
         self._redis.incr(key)
         return func(self, *args, **kwargs)
     return wrapper
