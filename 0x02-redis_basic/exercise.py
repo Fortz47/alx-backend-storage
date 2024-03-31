@@ -4,6 +4,7 @@ import redis
 from uuid import uuid4
 from typing import Union, Callable, Optional
 from functools import wraps
+from ast import literal_eval
 
 
 def replay(func: Callable) -> None:
@@ -15,7 +16,8 @@ def replay(func: Callable) -> None:
     outputs = f'{func.__qualname__}:outputs'
     zipped = zip(_redis.lrange(inputs, 0, -1), _redis.lrange(outputs, 0, -1))
     for input, output in zipped:
-        print(f"{f_name}(*{eval(input)}) -> {output.decode('utf-8')}")
+        input = literal_eval(input.decode('utf-8'))
+        print(f"{f_name}(*{input}) -> {output.decode('utf-8')}")
 
 
 def call_history(method: Callable) -> Callable:
