@@ -6,6 +6,17 @@ from typing import Union, Callable, Optional
 from functools import wraps
 
 
+def replay(func: Callable) -> None:
+    """display the history of calls of a particular function"""
+    f_name = func.__qualname__
+    print(f"{f_name} was called {cache.get(f_name, int)} times:")
+    inputs = f'{method.__qualname__}:inputs'
+    outputs = f'{method.__qualname__}:outputs'
+    zipped = zip(cache.get(inputs), cache.get(outputs))
+    for input, output in zipped:
+        print(f"{f_name}(*{input}) -> {output}")
+        
+
 def call_history(method: Callable) -> Callable:
     """stores the input and output of a function call to a resis list"""
     keyInputs = f'{method.__qualname__}:inputs'
