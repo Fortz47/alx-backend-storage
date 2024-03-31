@@ -9,10 +9,11 @@ from functools import wraps
 def replay(func: Callable) -> None:
     """display the history of calls of a particular function"""
     f_name = func.__qualname__
-    print(f"{f_name} was called {cache.get(f_name, int)} times:")
+    _redis = redis.Redis()
+    print(f"{f_name} was called {int(_redis.get(f_name))} times:")
     inputs = f'{method.__qualname__}:inputs'
     outputs = f'{method.__qualname__}:outputs'
-    zipped = zip(cache.get(inputs), cache.get(outputs))
+    zipped = zip(_redis.get(inputs), _redis.get(outputs))
     for input, output in zipped:
         print(f"{f_name}(*{input}) -> {output}")
         
