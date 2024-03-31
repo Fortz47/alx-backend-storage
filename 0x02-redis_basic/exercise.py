@@ -16,7 +16,7 @@ def replay(func: Callable) -> None:
     zipped = zip(_redis.lrange(inputs, 0, -1), _redis.lrange(outputs, 0, -1))
     for input, output in zipped:
         print(f"{f_name}(*{eval(input)}) -> {output}")
-        
+
 
 def call_history(method: Callable) -> Callable:
     """stores the input and output of a function call to a resis list"""
@@ -30,7 +30,6 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(keyOutputs, str(output))
         return output
     return wrapper
-        
 
 
 def count_calls(method: Callable) -> Callable:
@@ -47,6 +46,7 @@ def count_calls(method: Callable) -> Callable:
 class Cache:
     """creats a cache class thats connects to a redis db"""
     count = 0
+
     def __init__(self):
         """initialize the class"""
         self._redis = redis.Redis()
