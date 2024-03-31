@@ -15,7 +15,7 @@ def replay(func: Callable) -> None:
     outputs = f'{func.__qualname__}:outputs'
     zipped = zip(_redis.lrange(inputs, 0, -1), _redis.lrange(outputs, 0, -1))
     for input, output in zipped:
-        print(f"{f_name}(*{input}) -> {output}")
+        print(f"{f_name}(*{eval(input)}) -> {output}")
         
 
 def call_history(method: Callable) -> Callable:
