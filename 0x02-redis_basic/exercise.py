@@ -11,9 +11,9 @@ def replay(func: Callable) -> None:
     f_name = func.__qualname__
     _redis = redis.Redis()
     print(f"{f_name} was called {int(_redis.get(f_name))} times:")
-    inputs = f'{method.__qualname__}:inputs'
-    outputs = f'{method.__qualname__}:outputs'
-    zipped = zip(_redis.get(inputs), _redis.get(outputs))
+    inputs = f'{func.__qualname__}:inputs'
+    outputs = f'{func.__qualname__}:outputs'
+    zipped = zip(_redis.lrange(inputs, 0, -1), _redis.lrange(outputs), 0, -1)
     for input, output in zipped:
         print(f"{f_name}(*{input}) -> {output}")
         
