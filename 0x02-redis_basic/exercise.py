@@ -6,6 +6,21 @@ from typing import Union, Callable, Optional
 from functools import wraps
 
 
+def call_history(method: Callable) -> Callable:
+    """stores the input and output of a function call to a resis list"""
+    keyInputs = f'{method.__qualname__}:inputs'
+    keyOutputs = f'{method.__qualname__}:outputs'
+
+    @wraps(method)
+    def wrapper(self, *args):
+        self._redis.rpush(keyInputs, str(args))
+        output = method(self, *args)
+        self._redis.rpush(keyOutputs, str(output))
+        return output
+    return wrapper
+        
+
+
 def count_calls(method: Callable) -> Callable:
     """counts how many times methods of Cache class are called"""
     key = method.__qualname__
@@ -25,6 +40,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """"store item in db"""
